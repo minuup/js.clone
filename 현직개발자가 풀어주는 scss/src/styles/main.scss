@@ -1,0 +1,280 @@
+@import './nomalize';
+@import './constant';
+@import './mixins';
+@import './animation.scss';
+@import './hamburger';
+
+a {
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: gray;
+  color: white;
+  height: 200vh;
+}
+
+#navigation {
+  width: 100%;
+  position: fixed;
+  z-index: 2000;
+  #navigation-container {
+    width: 92%;
+    max-width: $CONTAINER_WIDTH;
+    @include propOnBreakpoint(
+      height,
+      null,
+      $NAVIGATION_HEIGHT,
+      $NAVIGATION_HEIGHT,
+      $NAVIGATION_HEIGHT,
+      $NAVIGATION_HEIGHT
+    );
+    display: flex;
+    @include propOnBreakpoint(flex-direction, column, row, row, row, row);
+    @include propOnBreakpoint(
+      justify-content,
+      left,
+      space-between,
+      space-between,
+      space-between,
+      space-between
+    );
+
+    @include propOnBreakpoint(
+      align-items,
+      space-between,
+      center,
+      center,
+      center,
+      center
+    );
+
+    margin: auto;
+
+    #logo-container {
+      height: $NAVIGATION_HEIGHT;
+      @include flex(left, center);
+      justify-content: space-between;
+    }
+
+    #collapse {
+      @include propOnBreakpoint(display, block, none, none, none, none);
+    }
+
+    #menu {
+      display: flex;
+
+      @include propOnBreakpoint(overflow, hidden, none, none, none, none);
+      @include propOnBreakpoint(flex-direction, column, row, row, row, row);
+      li {
+        transition: height, 500ms;
+        @include propOnBreakpoint(margin, 0 0, 0 8px, 0 8px, 0 8px, 0 8px);
+        @include propOnBreakpoint(display, flex, null, null, null, null);
+        a {
+          flex: 1;
+          padding: 12px 10px;
+          border-radius: $radius-m;
+          transition: background 200ms;
+          font-weight: 400;
+          line-height: 20px;
+          &:hover {
+            background: $whiteOpacity100;
+          }
+        }
+      }
+
+      &.open {
+        li {
+          height: 44px;
+          opacity: 1;
+        }
+      }
+      &.unopen {
+        li {
+          @include propOnBreakpoint(height, 0, 44px, 44px, 44px, 44px);
+          @include propOnBreakpoint(opacity, 0, 1, 1, 1, 1);
+          @include propOnBreakpoint(
+            transform,
+            translateY(-22px),
+            none,
+            none,
+            none,
+            none
+          );
+        }
+      }
+    }
+  }
+}
+
+#section_first {
+  opacity: 1;
+  pointer-events: none;
+  z-index: 100;
+  height: 100vh;
+  background: black;
+
+  #background {
+    position: fixed;
+    background: center/cover no-repeat url(../../public/assets/tosscareer.jpeg);
+    width: 100%;
+    height: 100vh;
+    filter: brightness(1-0.3);
+  }
+
+  #title {
+    opacity: 1;
+    @include propOnBreakpoint(font-size, 32px, 72px, 72px, 72px, 72px);
+    @include propOnBreakpoint(line-height, 47px, 89px, 89px, 89px, 89px);
+    @include propOnBreakpoint(top, 120px, 22vh, 22vh, 22vh, 22vh);
+    margin: 0;
+    position: fixed;
+    word-break: keep-all;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+  }
+
+  #descriptions {
+    @include propOnBreakpoint(font-size, 15px, 24px, 24px, 24px, 24px);
+    @include propOnBreakpoint(line-height, 24px, 34px, 34px, 34px, 34px);
+    @include propOnBreakpoint(top, 120px, 24vh, 24vh, 24vh, 24vh);
+    position: fixed;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    #description {
+      opacity: 0;
+      margin-bottom: 30px;
+      transition: all 200ms;
+    }
+  }
+
+  #down-arrow {
+    position: fixed;
+    bottom: 12px;
+    transform: translateX(-50%);
+    left: 50%;
+    margin: auto;
+
+    img {
+      width: 28px;
+      animation: 2s ease 0s infinite normal none running up_and_down;
+    }
+  }
+}
+
+#intersection {
+  @include propOnBreakpoint(height, 400px, 600px, 600px, 600px, 600px);
+}
+
+#section_last {
+  @include flex(center, center);
+  height: 600px;
+  background: center / cover no-repeat
+    url(../../public/assets/tosscareer35.jpeg);
+
+  #wrapper {
+    text-align: center;
+
+    :nth-child(1) {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 42px;
+    }
+    :nth-child(2) {
+      font-size: 14px;
+      line-height: 23px;
+      margin-bottom: 52px;
+    }
+  }
+}
+
+footer {
+  padding: 50px 0 100px;
+  color: $grey600;
+
+  background: $grey50;
+  #footer-inner {
+    margin: auto;
+    max-width: $CONTAINER_WIDTH;
+    @include propOnBreakpoint(padding, 0 40px, 0 67px, 0 67px, 0 67px, 0 67px);
+    #group-list {
+      display: flex;
+      @include propOnBreakpoint(flex-direction, column, row, row, row, row);
+      @include propOnBreakpoint(gap, 40px, none, none, none, none);
+      justify-content: space-between;
+      padding-bottom: 50px;
+
+      #site-group {
+        flex-basis: 170px;
+        #title {
+          @include flex(none, center);
+          color: $grey800;
+          font-size: 15px;
+          font-weight: 700;
+          padding-bottom: 5px;
+          height: 35px;
+        }
+        #item {
+          @include flex(none, center);
+          margin-bottom: 12px;
+          line-height: 1.4;
+        }
+
+        &:nth-child(4) {
+          flex: 1;
+        }
+      }
+    }
+
+    address {
+      font-size: 13px;
+      line-height: 20px;
+      #company-name {
+        display: block;
+        color: $grey800;
+        font-size: 16px;
+        font-weight: 700;
+        padding-bottom: 16px;
+        height: 35px;
+      }
+    }
+
+    #term-wrapper {
+      padding: 24px 0 30px;
+      font-size: 13px;
+      word-break: keep-all;
+      display: flex;
+      @include propOnBreakpoint(flex-direction, column, row, row, row, row);
+      @include propOnBreakpoint(gap, 10px, none, none, none, none);
+      #term {
+        padding-right: 30px;
+      }
+    }
+  }
+
+  #social-list {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+  }
+}
+
+button {
+  padding: 14px 18px;
+  outline: none;
+  background: $blue500;
+  border-radius: $radius-m;
+  border: none;
+  color: white;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background 200ms;
+  cursor: pointer;
+  &:hover {
+    background: $blue700;
+  }
+}

@@ -1,0 +1,86 @@
+@use 'sass:map';
+
+@mixin mobile {
+  @media (min-width: #{$BREAKPOINT_MOBILE}) {
+    @content;
+  }
+}
+@mixin big-mobile {
+  @media (min-width: #{$BREAKPOINT_BIG_MOBILE}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: #{$BREAKPOINT_TABLET}) {
+    @content;
+  }
+}
+@mixin big-tablet {
+  @media (min-width: #{$BREAKPOINT_BIG_TABLET}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: #{$BREAKPOINT_DESKTOP}) {
+    @content;
+  }
+}
+
+@mixin propOnBreakpoint(
+  $prop,
+  $mobile,
+  $big-mobile,
+  $tablet,
+  $big-tablet,
+  $desktop
+) {
+  #{$prop}: $mobile;
+
+  @include mobile {
+    #{$prop}: $mobile;
+  }
+  @include big-mobile {
+    #{$prop}: $mobile;
+  }
+  @include tablet {
+    #{$prop}: $tablet;
+  }
+  @include big-tablet {
+    #{$prop}: $big-tablet;
+  }
+  @include desktop {
+    #{$prop}: $desktop;
+  }
+}
+
+@mixin widthContentOnBreakpoint(
+  $mobile,
+  $big-mobile,
+  $tablet,
+  $big-tablet,
+  $desktop
+) {
+  width: $mobile;
+
+  @include mobile {
+    width: $mobile;
+  }
+  @include big-mobile {
+    width: $big-mobile;
+  }
+  @include tablet {
+    width: $tablet;
+  }
+  @include big-tablet {
+    width: $big-tablet;
+  }
+  @include desktop {
+    width: $desktop;
+  }
+}
+
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
